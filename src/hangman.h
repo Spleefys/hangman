@@ -10,4 +10,8 @@
 
 int check_arg(int argc, char * flag);
 
+void about_hangman();
+
+void menu();
+
 #endif
