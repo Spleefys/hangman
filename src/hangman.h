@@ -1,5 +1,5 @@
-#ifndef HANGING_H
-#define HANGING_H
+#ifndef HANGMAN_H
+#define HANGMAN_H
 
 #include <stdio.h>
 #include <stdio_ext.h>
