@@ -62,7 +62,7 @@ char * build_file_name(char level)
 	char template[LNAME] = "dic/_.txt";
 	for(int i = 0; i < LNAME; i++){
 		if(template[i] == '_'){
-			file[i] = '1';
+			file[i] = level;
 			continue;
 		}
 		file[i] = template[i];
@@ -91,10 +91,40 @@ int getrand(int min, int max)
 	return min + rand()%max;
 }
 
+void fill_alphabet(char * alphabet)
+{
+	for(int i = ASCII_a,j = 0; i < ASCII_z + 1; i++, j++){
+		alphabet[j] = (unsigned char)i;
+	}
+	printf("\n");
+}
+
+void print_alpabet(char * alphabet)
+{
+	for(int i = 0; i < COUNT_LETTERS + 1; i++)
+		printf("%c ", alphabet[i]);
+	printf("\n");
+}
+
+void change_alphabet(char * alphabet, char c)
+{
+	for(int i = 0; i < COUNT_LETTERS + 1; i++) {
+		if(alphabet[i] == c)
+			alphabet[i] = '_';
+	}
+}
+
+void print_word(char * word)
+{
+	for(int i = 0; i < strlen(word); i++)
+			printf("%c", word[i]);
+	printf("\n");	
+}
+
 int start_game(char level)
 {
 	FILE * f;
-	
+
 	char * file = build_file_name(level);
 	f = fopen(file, "r");
 
@@ -115,12 +145,47 @@ int start_game(char level)
 		random_word[i] = word[index - 1][i];
 	random_word[strlen(word[index - 1 ])] = '\0';
 
+	char * alphabet = malloc(sizeof(char) * 26);
+	fill_alphabet(alphabet);
+
 	char * guessed_word = malloc(sizeof(char) * (strlen(random_word)+1));
 	memset(guessed_word, '*', strlen(random_word));
 	guessed_word[strlen(random_word)] = '\0';
 
+	int number_of_iter = strlen(random_word) + 3; // a count of mistakes = 3; attemp = 3 + length of random word
 
+	while(number_of_iter--) {
 
+		print_alpabet(alphabet);
+
+		printf("enter a word : ");
+
+		char c = fgetc(stdin);
+		__fpurge(stdin);
+
+		change_alphabet(alphabet, c);
+
+		char * s = memchr(random_word, c, strlen(random_word));
+		if(s){
+			if(freq[(unsigned int)c] > 1){
+				while(freq[(unsigned int)c]--) {
+					s = memchr(random_word, c, strlen(random_word)); 
+					random_word[s-random_word] = toupper(c);
+					guessed_word[s - random_word] = c;
+				}
+				for(int i = 0; i < strlen(random_word); i++)
+					random_word[i] = tolower(random_word[i]);
+			}
+			else
+				guessed_word[s - random_word] = c;
+		}
+
+		print_word(random_word);
+		print_word(guessed_word);
+
+		if(!strcmp(guessed_word, random_word))
+			return 0;
+	}
 
 	for(int i = 0; i < 40; i++)
 		free(word[i]);

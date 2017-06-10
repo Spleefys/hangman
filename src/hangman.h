@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <stdio_ext.h>
-#include <unistd.h>
 #include <string.h>
+#include <time.h>
 #include <ctype.h>
 #include <stdlib.h>
 
@@ -12,11 +12,24 @@
 
 #define MAX_SYMBOLS 256
 
+#define ASCII_a 97
+#define ASCII_z 122
+
+#define COUNT_LETTERS 26
+
 int check_arg(int argc, char * flag);
 
 void about_hangman();
 
 int getrand(int min, int max);
+
+void print_alpabet(char * alphabet);
+
+void print_word(char * word);
+
+void change_alphabet(char * alphabet, char c);
+
+void fill_alphabet(char * alphabet);
 
 void freq_init(char * freq);
 
