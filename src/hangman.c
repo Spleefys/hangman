@@ -71,12 +71,35 @@ char * build_file_name(char level)
 	return file;
 }
 
+void freq_init(char * freq)
+{
+	memset(freq, 0, 256);
+}
+
+char * get_sym_freq(char * random_word, char * freq)
+{
+	freq = malloc(sizeof(char) * MAX_SYMBOLS);
+	freq_init(freq);
+	for(int i = 0; i < strlen(random_word); i++)
+		freq[(unsigned int)random_word[i]]++;
+	return freq; 
+}
+
 int start_game(char level)
 {
 	FILE * f;
 	
 	char * file = build_file_name(level);
 	f = fopen(file, "r");
+
+	char ** word = malloc(sizeof(char *) *40);
+	for(int i = 0; i< 40; i++)
+		word[i] = malloc(sizeof(char) * 8);
+	for(int i = 0; i < 40 ; i++)
+		fscanf(f, "%s", word[i]);
+
+	char * freq = NULL;
+	freq = get_sym_freq(word[index - 1], freq);
 
 	fclose(f);
 	return 0;

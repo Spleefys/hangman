@@ -10,9 +10,15 @@
 
 #define LNAME 10
 
+#define MAX_SYMBOLS 256
+
 int check_arg(int argc, char * flag);
 
 void about_hangman();
+
+void freq_init(char * freq);
+
+char * get_sym_freq(char * random_word, char * freq);
 
 char * build_file_name(char level);
 
