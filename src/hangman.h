@@ -8,11 +8,15 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+#define LNAME 10
+
 int check_arg(int argc, char * flag);
 
 void about_hangman();
 
-//int start_game(char level);
+char * build_file_name(char level);
+
+int start_game(char level);
 
 void menu();
 

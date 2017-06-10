@@ -49,8 +49,35 @@ int check_arg(int argc, char * flag)
 	return correct;
 }
 
-void about_hangman(){
+void about_hangman()
+{
 	printf("\tВиселица - игра направленная на развитие мышлени, посредством побуквенного угадывания слов, случайно выбираемых в соответствии с заданным уровнем сложности из базы данных программы.\n");
 	printf("\tВ этой игре Вам необходимо, выбирая буквы из словаря, отгадать загаданное слово. Слова на английском, для лучшего запоминания английкого языка.\n");
 	printf("\tКогда вы неправильно угадываете букву, в консоли рисуется виселица. Если вы ошибетесь 5 раз, вы проиграете.\n");
+}
+
+char * build_file_name(char level)
+{
+	char * file = malloc(sizeof(char)* LNAME);
+	char template[LNAME] = "dic/_.txt";
+	for(int i = 0; i < LNAME; i++){
+		if(template[i] == '_'){
+			file[i] = '1';
+			continue;
+		}
+		file[i] = template[i];
+	}
+
+	return file;
+}
+
+int start_game(char level)
+{
+	FILE * f;
+	
+	char * file = build_file_name(level);
+	f = fopen(file, "r");
+
+	fclose(f);
+	return 0;
 }

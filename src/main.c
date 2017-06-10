@@ -23,7 +23,9 @@ int main(int argc, char** argv){
 				level = tolower(level);
 				__fpurge(stdin);
 				if(!check_level(level)){
-					flag1 = 0;
+					start_game(level);
+                    flag1 = 0;
+                    level = 0;
 				}
             }
             break;
