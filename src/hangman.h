@@ -16,6 +16,8 @@ int check_arg(int argc, char * flag);
 
 void about_hangman();
 
+int getrand(int min, int max);
+
 void freq_init(char * freq);
 
 char * get_sym_freq(char * random_word, char * freq);

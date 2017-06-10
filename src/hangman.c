@@ -85,6 +85,12 @@ char * get_sym_freq(char * random_word, char * freq)
 	return freq; 
 }
 
+int getrand(int min, int max)
+{
+	srand(time(NULL));
+	return min + rand()%max;
+}
+
 int start_game(char level)
 {
 	FILE * f;
@@ -98,8 +104,33 @@ int start_game(char level)
 	for(int i = 0; i < 40 ; i++)
 		fscanf(f, "%s", word[i]);
 
+	int index = getrand(1, 40);
+	printf("%s\n", word[index - 1]);  // hide
+
 	char * freq = NULL;
 	freq = get_sym_freq(word[index - 1], freq);
+
+	char * random_word = malloc(sizeof(char) * (strlen(word[index - 1])+1));
+	for(int i = 0; i< strlen(word[index - 1]); i++)
+		random_word[i] = word[index - 1][i];
+	random_word[strlen(word[index - 1 ])] = '\0';
+
+	char * guessed_word = malloc(sizeof(char) * (strlen(random_word)+1));
+	memset(guessed_word, '*', strlen(random_word));
+	guessed_word[strlen(random_word)] = '\0';
+
+
+
+
+	for(int i = 0; i < 40; i++)
+		free(word[i]);
+	free(word);
+
+
+	free(guessed_word);
+	free(random_word);
+	free(freq);
+	free(file);
 
 	fclose(f);
 	return 0;
