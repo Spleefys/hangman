@@ -184,14 +184,14 @@ int start_game(char level)
 		print_word(guessed_word);
 
 		if(!strcmp(guessed_word, random_word))
-			return 0;
+			break;
 	}
 
 	for(int i = 0; i < 40; i++)
 		free(word[i]);
 	free(word);
 
-
+	free(alphabet);
 	free(guessed_word);
 	free(random_word);
 	free(freq);
