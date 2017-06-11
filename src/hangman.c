@@ -220,6 +220,18 @@ void print_word(char * word)
 	printf("\n");
 }
 
+int invalid_char(char c)
+{
+	char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+	if(strchr(alphabet, c)) {
+		return 0;
+	}
+	else {
+		printf("Невалидный ввод!\n");
+		return -1;
+	}
+}
+
 int start_game(char level)
 {
 	FILE * f;
@@ -262,6 +274,9 @@ int start_game(char level)
 
 		char c = fgetc(stdin);
 		__fpurge(stdin);
+
+		if(invalid_char(c))
+			continue;
 
 		change_alphabet(alphabet, c);
 
