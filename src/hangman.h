@@ -19,6 +19,12 @@
 
 int check_arg(int argc, char * flag);
 
+int print_hang(int mistakes);
+
+void lose();
+
+void win();
+
 void about_hangman();
 
 int getrand(int min, int max);
