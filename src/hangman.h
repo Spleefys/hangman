@@ -21,6 +21,8 @@ int check_arg(int argc, char * flag);
 
 int print_hang(int mistakes);
 
+int invalid_char(char c);
+
 void lose();
 
 void win();
