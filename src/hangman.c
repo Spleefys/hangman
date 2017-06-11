@@ -101,14 +101,14 @@ void fill_alphabet(char * alphabet)
 
 void print_alpabet(char * alphabet)
 {
-	for(int i = 0; i < COUNT_LETTERS + 1; i++)
+	for(int i = 0; i < COUNT_LETTERS ; i++)
 		printf("%c ", alphabet[i]);
 	printf("\n");
 }
 
 void change_alphabet(char * alphabet, char c)
 {
-	for(int i = 0; i < COUNT_LETTERS + 1; i++) {
+	for(int i = 0; i < COUNT_LETTERS ; i++) {
 		if(alphabet[i] == c)
 			alphabet[i] = '_';
 	}
