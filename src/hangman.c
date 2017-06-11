@@ -101,14 +101,14 @@ void fill_alphabet(char * alphabet)
 
 void print_alpabet(char * alphabet)
 {
-	for(int i = 0; i < COUNT_LETTERS + 1; i++)
+	for(int i = 0; i < COUNT_LETTERS ; i++)
 		printf("%c ", alphabet[i]);
 	printf("\n");
 }
 
 void change_alphabet(char * alphabet, char c)
 {
-	for(int i = 0; i < COUNT_LETTERS + 1; i++) {
+	for(int i = 0; i < COUNT_LETTERS ; i++) {
 		if(alphabet[i] == c)
 			alphabet[i] = '_';
 	}
@@ -184,14 +184,14 @@ int start_game(char level)
 		print_word(guessed_word);
 
 		if(!strcmp(guessed_word, random_word))
-			return 0;
+			break;
 	}
 
 	for(int i = 0; i < 40; i++)
 		free(word[i]);
 	free(word);
 
-
+	free(alphabet);
 	free(guessed_word);
 	free(random_word);
 	free(freq);
