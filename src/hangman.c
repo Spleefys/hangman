@@ -22,6 +22,56 @@ void menu_levels(){
 	printf("Для выбора уровня, напииши его номер\n");
 }
 
+int print_hang(int mistakes)
+{
+		if (mistakes == 1){
+			printf(" _________     \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("\n");
+			return 0;
+		}
+		else if(mistakes == 2){
+			printf(" _________     \n");
+			printf("|         |    \n");
+			printf("|         0    \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("\n");
+			return 0;
+		}
+		else if(mistakes == 3){
+			printf(" _________     \n");
+			printf("|         |    \n");
+			printf("|         0    \n");
+			printf("|        /|\\  \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("\n");
+			return 0;
+		}
+		else if(mistakes == 4)
+		{
+			printf(" _________     \n");
+			printf("|         |    \n");
+			printf("|         0    \n");
+			printf("|        /|\\  \n");
+			printf("|        / \\  \n");
+			printf("|              \n");
+			printf("|              \n");
+			printf("\n");
+			return 0;
+		}
+		return 0;
+}
+
 int check_level(char level)
 {
 	int c;
@@ -82,7 +132,7 @@ char * get_sym_freq(char * random_word, char * freq)
 	freq_init(freq);
 	for(int i = 0; i < strlen(random_word); i++)
 		freq[(unsigned int)random_word[i]]++;
-	return freq; 
+	return freq;
 }
 
 int getrand(int min, int max)
@@ -118,7 +168,7 @@ void print_word(char * word)
 {
 	for(int i = 0; i < strlen(word); i++)
 			printf("%c", word[i]);
-	printf("\n");	
+	printf("\n");
 }
 
 int start_game(char level)
@@ -153,7 +203,8 @@ int start_game(char level)
 	guessed_word[strlen(random_word)] = '\0';
 
 	int number_of_iter = strlen(random_word) + 3; // a count of mistakes = 3; attemp = 3 + length of random word
-
+	int mistakes = 0;
+	
 	while(number_of_iter--) {
 
 		print_alpabet(alphabet);
@@ -169,7 +220,7 @@ int start_game(char level)
 		if(s){
 			if(freq[(unsigned int)c] > 1){
 				while(freq[(unsigned int)c]--) {
-					s = memchr(random_word, c, strlen(random_word)); 
+					s = memchr(random_word, c, strlen(random_word));
 					random_word[s-random_word] = toupper(c);
 					guessed_word[s - random_word] = c;
 				}
@@ -179,7 +230,12 @@ int start_game(char level)
 			else
 				guessed_word[s - random_word] = c;
 		}
-
+		else{
+			mistakes++;
+			print_hang(mistakes);
+			if(mistakes == 4)
+				break;
+		}
 		print_word(random_word);
 		print_word(guessed_word);
 
