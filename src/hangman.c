@@ -72,6 +72,29 @@ int print_hang(int mistakes)
 		return 0;
 }
 
+void lose(){
+	printf("Ты проиграл!\n");
+	printf("░░░░░░░░░░░░░░░░░░░░░░░░▄▄█▀▀▀▀█▄▄░░░░░\n");
+	printf("░░░░░░░░░░░░░░░░░░░░░░▄█▀░░░░░░░░▀█▄▄░░\n");
+	printf("░░▄██████▄▄▄▄▄███████▀░░░░░░░░░░░░░░▀█▄\n");
+	printf("░▄███████████████████░░║║╔═░░║║╔╗╔╗╔╗░█\n");
+	printf("░████████████████████░░╠╣╠═░░╠╣╠╣║║║║░█\n");
+	printf("▄█████▀▀▀▀███████████▄░║║╚═░░║║║║╩╩╚╝░█\n");
+	printf("████▀░░▄▄░░██▀░░░░▀███░░░░░░░░░░░░░░░░█\n");
+	printf("██▀█▄░▀██░░██░░▄██░███▀▄░░░░░═╦═╔╗║╔░░█\n");
+	printf("▀█▄░▀▄▄▄▄▄▄▀█▄░░▀▀░███░▀█▄░░░░║░╠╣╠╣░░█\n");
+	printf("░██░░░░░░░░░░▀▀▀▀▀▀██▀░░░▀█▄░░║░║║║╚░░█\n");
+	printf("░▀█░░░░░░▄▄░░░░░░░░░█░░░░░░▀█▄░░░░░▄▄█▀\n");
+	printf("░░▀▀▄▄░░░░▀▀░░░░░░▄█▀░░░░░░▄██▀▀▀▀▀▀░░░\n");
+	printf("░░░░░▀▀▀▀█▄▄▄▄▄█▀▀░░░░░░░░█▀▀░░░░░░░░░░\n");
+	printf("░░░░░░░▄▄▄▄██▄▄▄░░░░░░░░░▀░░░░░░░░░░░░░\n");
+	printf("░░░░░▄███████████▄░░░░░░░░░░░░░░░░░░░░░\n");
+	printf("░░░░▄█████████████░░░░░░░░░░░░░░░░░░░░░\n");
+	printf("░░░░█▀██████████▀█░░░░░░░░░░░░░░░░░░░░░\n");
+	printf("░░░█▀░██████████░▀█░░░░░░░░░░░░░░░░░░░░\n");
+	printf("\n");
+}
+
 int check_level(char level)
 {
 	int c;
@@ -204,7 +227,7 @@ int start_game(char level)
 
 	int number_of_iter = strlen(random_word) + 3; // a count of mistakes = 3; attemp = 3 + length of random word
 	int mistakes = 0;
-	
+
 	while(number_of_iter--) {
 
 		print_alpabet(alphabet);
@@ -233,8 +256,10 @@ int start_game(char level)
 		else{
 			mistakes++;
 			print_hang(mistakes);
-			if(mistakes == 4)
+			if(mistakes == 4){
+				lose();
 				break;
+			}
 		}
 		print_word(random_word);
 		print_word(guessed_word);
