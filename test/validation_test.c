@@ -123,4 +123,47 @@ CTEST(arithmetic_suite, check_arg2)
 	ASSERT_EQUAL(i, result);	
 }
 
+CTEST(arithmetic_suite, invalid_char)
+{
+	char c = 'a';
+
+	int result = invalid_char(c);
+
+	const int i = 0; 
+
+	ASSERT_EQUAL(i, result);
+}
+
+CTEST(arithmetic_suite, invalid_char1)
+{
+	char c = 'z';
+
+	int result = invalid_char(c);
+
+	const int i = 0; 
+
+	ASSERT_EQUAL(i, result);
+}
+
+CTEST(arithmetic_suite, invalid_char2)
+{
+	char c = 'A';
+
+	int result = invalid_char(c);
+
+	const int i = -1; 
+
+	ASSERT_EQUAL(i, result);
+}
+
+CTEST(arithmetic_suite, invalid_char3)
+{
+	char c = '5';
+
+	int result = invalid_char(c);
+
+	const int i = -1; 
+
+	ASSERT_EQUAL(i, result);
+}
 
