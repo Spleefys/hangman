@@ -89,3 +89,38 @@ CTEST(arithmetic_suite, check_level7)
 	ASSERT_EQUAL(i, result);	
 }
 
+
+CTEST(arithmetic_suite, check_arg)
+{
+	char * flag = "about";
+
+	const int result = check_arg(flag);
+
+	const int i = 1;
+	
+	ASSERT_EQUAL(i, result);	
+}
+
+CTEST(arithmetic_suite, check_arg1)
+{
+	char * flag = "bullshit";
+
+	const int result = check_arg(flag);
+
+	const int i = 1;
+	
+	ASSERT_EQUAL(i, result);	
+}
+
+CTEST(arithmetic_suite, check_arg2)
+{
+	char * flag = NULL;
+
+	const int result = check_arg(flag);
+
+	const int i = 0;
+	
+	ASSERT_EQUAL(i, result);	
+}
+
+
