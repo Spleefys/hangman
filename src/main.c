@@ -2,6 +2,12 @@
 
 int main(int argc, char** argv) {
 	int correct = check_arg(argv[1]);
+	
+	if (argv[1]){
+		if(!strcmp(argv[1],"about") && argv[1]);
+			return 0;
+	}
+
 	if (correct)
 		exit(EXIT_FAILURE);
 
