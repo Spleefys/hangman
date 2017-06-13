@@ -1,5 +1,6 @@
+bin/hang
 bin/hang-test
-build/src/hangman.o
-build/test/hangman_test.o
-build/test/main.o
-build/test/validation_test.o
+build/src/*.o
+build/src/*.d
+build/test/*.o
+build/test/*.d
