@@ -1,7 +1,7 @@
 #include "hangman.h"
 
 int main(int argc, char** argv){
-	int correct = check_arg(argc, argv[1]);
+	int correct = check_arg(argv[1]);
 	if (correct)
 		exit(EXIT_FAILURE);
 
@@ -15,7 +15,6 @@ int main(int argc, char** argv){
     	switch (button) {
     	case 's':
     		printf("Начинаем!\n");
-            char level = 0;
 			int flag1 = 1;
 			while (flag1) {
 				menu_levels();
@@ -25,7 +24,6 @@ int main(int argc, char** argv){
 				if (!check_level(level)) {
 					start_game(level);
                     flag1 = 0;
-                    level = 0;
 				}
             }
             break;

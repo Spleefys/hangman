@@ -96,14 +96,14 @@ CTEST(arithmetic_suite, check_arg)
 
 	const int result = check_arg(flag);
 
-	const int i = 1;
+	const int i = 0;
 	
 	ASSERT_EQUAL(i, result);	
 }
 
 CTEST(arithmetic_suite, check_arg1)
 {
-	char * flag = "bullshit";
+	char * flag = "help";
 
 	const int result = check_arg(flag);
 

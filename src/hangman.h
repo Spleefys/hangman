@@ -17,7 +17,7 @@
 
 #define COUNT_LETTERS 26
 
-int check_arg(int argc, char * flag);
+int check_arg(char * flag);
 
 int print_hang(int mistakes);
 
