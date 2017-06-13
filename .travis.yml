@@ -7,4 +7,4 @@ compiler:
 install: true
 script:
   - make
-  - make tests
+  - make test
