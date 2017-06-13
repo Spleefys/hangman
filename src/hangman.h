@@ -17,7 +17,13 @@
 
 #define COUNT_LETTERS 26
 
-int check_arg(int argc, char * flag);
+int check_arg(char * flag);
+
+int check_malloc(char * ptr);
+
+int check_malloc_r(char ** ptr);
+
+int check_level(char level);
 
 int print_hang(int mistakes);
 
@@ -51,6 +57,5 @@ void menu();
 
 void menu_levels();
 
-int check_level(char level);
 
 #endif
