@@ -150,6 +150,18 @@ int check_arg(char * flag)
 	return correct;
 }
 
+int check_malloc(char * ptr) {
+	if(ptr == NULL)
+		exit(EXIT_FAILURE);
+	return 0;
+}
+
+int check_malloc_r(char ** ptr) {
+	if(ptr == NULL)
+		exit(EXIT_FAILURE);
+	return 0;
+}
+
 void about_hangman()
 {
 	printf("\tВиселица - игра направленная на развитие мышлени, посредством побуквенного угадывания слов, случайно выбираемых в соответствии с заданным уровнем сложности из базы данных программы.\n");
@@ -160,6 +172,7 @@ void about_hangman()
 char * build_file_name(char level)
 {
 	char * file = malloc(sizeof(char)* LNAME);
+	check_malloc(file);
 	char template[LNAME] = "dic/_.txt";
 	for (int i = 0; i < LNAME; i++) {
 		if (template[i] == '_') {
@@ -180,6 +193,7 @@ void freq_init(char * freq)
 char * get_sym_freq(char * random_word, char * freq)
 {
 	freq = malloc(sizeof(char) * MAX_SYMBOLS);
+	check_malloc(freq);
 	freq_init(freq);
 	for (int i = 0; i < strlen(random_word); i++)
 		freq[(unsigned int)random_word[i]]++;
@@ -242,8 +256,11 @@ int start_game(char level)
 	f = fopen(file, "r");
 
 	char ** word = malloc(sizeof(char *) * 40);
-	for (int i = 0; i < 40; i++)
+	check_malloc_r(word);
+	for (int i = 0; i < 40; i++){
 		word[i] = malloc(sizeof(char) * 8);
+		check_malloc(word[i]);
+	}
 	for (int i = 0; i < 40 ; i++)
 		fscanf(f, "%s", word[i]);
 
@@ -253,14 +270,17 @@ int start_game(char level)
 	freq = get_sym_freq(word[index - 1], freq);
 
 	char * random_word = malloc(sizeof(char) * (strlen(word[index - 1]) + 1));
+	check_malloc(random_word);
 	for (int i = 0; i< strlen(word[index - 1]); i++)
 		random_word[i] = word[index - 1][i];
 	random_word[strlen(word[index - 1 ])] = '\0';
 
 	char * alphabet = malloc(sizeof(char) * 26);
+	check_malloc(alphabet);
 	fill_alphabet(alphabet);
 
 	char * guessed_word = malloc(sizeof(char) * (strlen(random_word) + 1));
+	check_malloc(guessed_word);
 	memset(guessed_word, '*', strlen(random_word));
 	guessed_word[strlen(random_word)] = '\0';
 

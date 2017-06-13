@@ -51,7 +51,7 @@ CTEST(arithmetic_suite, check_level4)
 
 	const int result = check_level(level);
 
-	const int i = 0;
+	const int i = 1;
 	
 	ASSERT_EQUAL(i, result);	
 }
@@ -62,7 +62,7 @@ CTEST(arithmetic_suite, check_level5)
 
 	const int result = check_level(level);
 
-	const int i = 1;
+	const int i = -1;
 	
 	ASSERT_EQUAL(i, result);	
 }
@@ -73,7 +73,7 @@ CTEST(arithmetic_suite, check_level6)
 
 	const int result = check_level(level);
 
-	const int i = 1;
+	const int i = -1;
 	
 	ASSERT_EQUAL(i, result);	
 }
@@ -84,7 +84,7 @@ CTEST(arithmetic_suite, check_level7)
 
 	const int result = check_level(level);
 
-	const int i = 1;
+	const int i = -1;
 	
 	ASSERT_EQUAL(i, result);	
 }

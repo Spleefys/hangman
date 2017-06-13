@@ -1,6 +1,6 @@
 #include "hangman.h"
 
-int main(int argc, char** argv){
+int main(int argc, char** argv) {
 	int correct = check_arg(argv[1]);
 	if (correct)
 		exit(EXIT_FAILURE);

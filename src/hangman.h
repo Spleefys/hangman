@@ -19,6 +19,12 @@
 
 int check_arg(char * flag);
 
+int check_malloc(char * ptr);
+
+int check_malloc_r(char ** ptr);
+
+int check_level(char level);
+
 int print_hang(int mistakes);
 
 int invalid_char(char c);
@@ -51,6 +57,5 @@ void menu();
 
 void menu_levels();
 
-int check_level(char level);
 
 #endif
