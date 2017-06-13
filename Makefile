@@ -8,7 +8,7 @@ BUILD_PATH := build
 
 CC = gcc
 INCLUDES = -I $(SRC_PATH)/ -I thirdparty/
-##-std = c99
+-std = c99
 
 SRC_WILD := $(addprefix $(BUILD_PATH)/$(SRC_PATH)/, $(notdir $(wildcard $(addsuffix /*.c, $(SRC_PATH)))))
 TEST_SRC_WILD := $(addprefix $(BUILD_PATH)/$(TEST_PATH)/, $(notdir $(wildcard $(addsuffix /*.c, $(TEST_PATH)))))
