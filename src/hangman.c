@@ -123,15 +123,17 @@ void lose(){
 
 int check_level(char level)
 {
-	int c;
-	if (level == '1' || level == '2'
-			|| level == '3' || level == '4' || level == 'q') {
-		c = 0;
+	char levels[] = "1234";
+	if (strchr(levels, level)) {
+		return 0;
 	}
-	else {
-		c = 1;
+	else if(level == 'q') {
+		return 1;
 	}
-	return c;
+	else{
+		printf("Невалидный ввод!\n");
+		return -1;	
+	}
 }
 
 int check_arg(char * flag)
