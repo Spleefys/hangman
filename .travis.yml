@@ -1,0 +1,10 @@
+os:
+  linux
+language: c
+sudo: false
+compiler:
+  - gcc
+install: true
+script:
+  - make
+  - make tests
