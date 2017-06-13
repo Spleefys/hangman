@@ -1,46 +1,47 @@
-.PHONY: all clean test
+BIN_NAME := hang
+TEST_BIN_NAME := $(BIN_NAME)-test
 
-all: bin/hang
-test: bin/hang-test
+SRC_PATH := src
+TEST_PATH := test
+BIN_PATH := bin
+BUILD_PATH := build
 
-bin/hang: build/src/main.o build/src/hangman.o src/hangman.h
-	mkdir bin -p
-	gcc -Wall -Werror build/src/main.o build/src/hangman.o -o bin/hang
+CC = gcc
+INCLUDES = -I $(SRC_PATH)/ -I thirdparty/
+##-std = c99
 
-build/src/main.o: src/main.c src/hangman.h
-	mkdir build -p
-	mkdir build/src -p
-	gcc -Wall -Werror -c src/main.c -o build/src/main.o
+SRC_WILD := $(addprefix $(BUILD_PATH)/$(SRC_PATH)/, $(notdir $(wildcard $(addsuffix /*.c, $(SRC_PATH)))))
+TEST_SRC_WILD := $(addprefix $(BUILD_PATH)/$(TEST_PATH)/, $(notdir $(wildcard $(addsuffix /*.c, $(TEST_PATH)))))
+TEST_SRC_WILD += $(BUILD_PATH)/$(TEST_PATH)/hangman.c
 
-build/src/hangman.o: src/hangman.c src/hangman.h
-	mkdir build -p
-	mkdir build/src -p
-	gcc -Wall -Werror -c src/hangman.c -o build/src/hangman.o
+.PHOMY: all
+all: dirs $(BIN_PATH)/$(BIN_NAME)
 
+$(BIN_PATH)/$(BIN_NAME): $(patsubst %.c, %.o, $(SRC_WILD))
+	$(CC) -Wall $^ -o $@
+
+$(BUILD_PATH)/$(SRC_PATH)/%.o: $(SRC_PATH)/%.c
+	$(CC) -Wall $(INCLUDES) -MMD -c $< -o $@
+
+.PHOMY: test
+test: dirs $(BIN_PATH)/$(TEST_BIN_NAME)
+$(BIN_PATH)/$(TEST_BIN_NAME): $(patsubst %.c, %.o, $(TEST_SRC_WILD))
+	$(CC) -Wall $^ -o $@
+	$(BIN_PATH)/$(TEST_BIN_NAME)
+
+VPATH := $(SRC_PATH) $(TEST_PATH)
+$(BUILD_PATH)/$(TEST_PATH)/%.o: %.c
+	$(CC) -Wall $(INCLUDES) -MMD -c $< -o $@
+
+-include &(wildcard *.d)
+
+.PHONY: dirs
+dirs:
+	@mkdir -p $(BUILD_PATH)/$(SRC_PATH)
+	@mkdir -p $(BUILD_PATH)/$(TEST_PATH)
+	@mkdir -p $(BIN_PATH)
+
+.PHOMY: clean
 clean:
-	rm -f build/src/*.o build/test/*.o bin/hang bin/hang-test
-
-bin/hang-test: build/src/hangman.o build/test/hangman_test.o build/test/main.o \
-build/test/validation_test.o src/hangman.h thirdparty/ctest.h
-	mkdir bin -p
-	gcc -Wall -Werror build/src/hangman.o build/test/hangman_test.o build/test/main.o \
-	build/test/validation_test.o -o bin/hang-test
-	./bin/hang-test
-
-build/test/hangman_test.o: test/hangman_test.c src/hangman.h thirdparty/ctest.h
-	mkdir build -p
-	mkdir build/test -p
-	gcc -Wall -Werror -I thirdparty -I src -c test/hangman_test.c -o \
-	build/test/hangman_test.o
-
-build/test/main.o: test/main.c thirdparty/ctest.h
-	mkdir build -p
-	mkdir build/test -p
-	gcc -Wall -Werror -I thirdparty -I src -c test/main.c -o build/test/main.o
-
-build/test/validation_test.o: test/validation_test.c src/hangman.h thirdparty/ctest.h
-	mkdir build -p
-	mkdir build/test -p
-	gcc -Wall -Werror -I thirdparty -I src -c test/validation_test.c -o \
-	build/test/validation_test.o
-
+	$(RM) -r $(BUILD_PATH)
+	$(RM) -r $(BIN_PATH)
